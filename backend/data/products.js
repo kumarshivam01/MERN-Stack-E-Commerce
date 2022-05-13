@@ -72,5 +72,5 @@ const products = [
         image:'/images/speaker.jpg'
     },
 ]
-
-export default products;
+// export default products;
+module.exports=products

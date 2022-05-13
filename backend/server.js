@@ -1,5 +1,5 @@
 const express = require('express')
-const product = require ('./data/products')
+const products  = require ('./data/products')
 const app = express()
 
 app.get('/', (req,res)=>{
@@ -7,11 +7,11 @@ app.get('/', (req,res)=>{
 })
 
 app.get('/products', (req,res)=>{
-    res.json(product)
+    res.json(products)
 })
 
 app.get('/products/:id',(req,res)=>{
-    const product = product.find((p)=>p.id === req.params.id)
+    const product = products.find((p)=>p._id === req.params.id)
     res.json(product)
 })
 
