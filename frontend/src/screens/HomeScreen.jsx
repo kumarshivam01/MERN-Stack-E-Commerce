@@ -6,7 +6,8 @@ export default function HomeScreen() {
   const [Products,setProducts] = useState([])
   useEffect(()=>{
     const fetchProducts = async ()=>{
-      const {data} = await axios.get('/products')
+      const {data} = await axios.get('http://localhost:8080/products')
+      // const data = res.json()
       setProducts(data) 
     }
     fetchProducts()
