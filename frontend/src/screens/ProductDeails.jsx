@@ -1,21 +1,32 @@
-import React from 'react'
-import Products from '../products'
+import React , {useState, useEffect} from 'react'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Row, Col, ListGroup, Button, Image } from 'react-bootstrap'
 import { ListGroupItem } from 'react-bootstrap'
 import Rating from '../components/Rating'
-export default function ProductDeails({ match }) {
-    const product = Products.find((p) => p._id === match.params.id)
-
+export default function ProductDeails() {
+    // const product = Products.find((p) => p._id === match.params.id)
+    const { id } = useParams();
+    const [product, setProducts] = useState([])
+    useEffect(()=>{
+        const fetchProducts = async ()=>{
+          const {data} = await axios.get(`http://localhost:8080/products/${id}`)
+          // const data = res.json()
+          setProducts(data) 
+        }
+        fetchProducts()
+      },[])
+      console.log(product)
     return (
         <>
             <div>
-            <Link to='/' className='btn btn-light'>Go Back</Link>
+            <Link to='/' className='btn btn-light'> <i className='fas fa-arrow-left'></i> &nbsp; Go Back</Link>
                 <Row>
-                    <col md={6}>
+                    <Col md={6}>
                         <Image src={product.image} alt={product.name} fluid />
-                    </col>
-                    <col md={3}>
+                    </Col>
+                    <Col md={6}>
                         <ListGroup variant='flush'>
                             <ListGroupItem>
                                 <h3>{product.name}</h3>
@@ -26,8 +37,7 @@ export default function ProductDeails({ match }) {
                             <ListGroupItem>Price : ${product.price}</ListGroupItem>
                             <ListGroupItem>{product.description}</ListGroupItem>
                         </ListGroup>
-                    </col>
-                    <col md={3}>
+                        <Col md={5} className='mt-4'>
                         <ListGroupItem>
                             <Row>
                                 <Col>Status :</Col>
@@ -37,7 +47,9 @@ export default function ProductDeails({ match }) {
                         <ListGroupItem>
                             <Button className='btn-block' type="button">Add To Cart</Button>
                         </ListGroupItem>
-                    </col>
+                    </Col>
+                    </Col>
+                    
                 </Row>
             </div>
         </>

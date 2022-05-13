@@ -66,7 +66,7 @@ const products = [
         brand:'Zebronics',
         category:'Electronics',
         price:699,
-        countInStock:4,
+        countInStock:0,
         rating:3.9,
         numReviews:2,
         image:'/images/speaker.jpg'

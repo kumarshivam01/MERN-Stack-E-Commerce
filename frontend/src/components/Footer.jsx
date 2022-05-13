@@ -9,7 +9,7 @@ export default function Footer() {
         <footer>
             <Container>
                 <Row>
-                    <Col className='text-center'>
+                    <Col className='text-center mb-5 mt-5'  >
                         <span> Copyright &copy; Technifo YT</span>
                     </Col>
                 </Row>
