@@ -1,26 +1,33 @@
-import React , {useState, useEffect} from 'react'
-import axios from 'axios'
+import React , { useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Row, Col, ListGroup, Button, Image } from 'react-bootstrap'
-import { ListGroupItem } from 'react-bootstrap'
+import { ListGroupItem, } from 'react-bootstrap'
 import Rating from '../components/Rating'
+import { useDispatch, useSelector } from 'react-redux'
+import {listProductDetails} from '../actions/productionAction'
+import Loader from '../components/shared/Loader'
+import Message from '../components/shared/Message'
 export default function ProductDeails() {
     // const product = Products.find((p) => p._id === match.params.id)
     const { id } = useParams();
-    const [product, setProducts] = useState([])
+    const dispatch = useDispatch()
+    const productDetails = useSelector(state=>state.productDetails)
+    const {loading,error,product} = productDetails
     useEffect(()=>{
-        const fetchProducts = async ()=>{
-          const {data} = await axios.get(`http://localhost:8080/products/${id}`)
-          // const data = res.json()
-          setProducts(data) 
-        }
-        fetchProducts()
-      },[])
+        // const fetchProducts = async ()=>{
+        //   const {data} = await axios.get(`/api/products/${id}`)
+        //   // const data = res.json()
+        //   setProducts(data) 
+        // }
+        // fetchProducts()
+        dispatch(listProductDetails(id))
+      },[dispatch])
       console.log(product)
     return (
         <>
-            <div>
+        {loading ? <Loader/>:error?<Message variant='danger'>{error}</Message> : 
+            <div> 
             <Link to='/' className='btn btn-light'> <i className='fas fa-arrow-left'></i> &nbsp; Go Back</Link>
                 <Row>
                     <Col md={6}>
@@ -52,6 +59,7 @@ export default function ProductDeails() {
                     
                 </Row>
             </div>
+        }
         </>
     )
 }

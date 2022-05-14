@@ -11,7 +11,7 @@ function App() {
       <Header />
       <main className="my-3">
         <Container>
-          <h1>Hello E-commerce</h1>
+          {/* <h1>Hello E-commerce</h1> */}
     <Routes>
           <Route exact path='/' element={<HomeScreen/>}/>
           <Route exact path='/product/:id' element={<ProductDeails/>}/>
